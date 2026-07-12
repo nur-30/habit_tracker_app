@@ -1,0 +1,19 @@
+Tambahkan baris berikut di dalam tag <manifest> pada file:
+android/app/src/main/AndroidManifest.xml
+
+(letakkan sebelum tag <application>)
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+Ini diperlukan agar package `image_picker` bisa membuka kamera perangkat
+saat pengguna menekan tombol "Ambil Foto Bukti" di HabitDetailScreen.
+
+Untuk penjelasan "Permission handling" saat presentasi (poin D pada
+rubrik penilaian):
+- image_picker sudah menangani permintaan izin runtime secara otomatis
+  saat pertama kali dipanggil (menampilkan dialog izin kamera bawaan Android).
+- Jika pengguna menolak izin, ImagePicker akan melempar exception yang
+  ditangkap oleh blok try-catch di `_capturePhotoProof()` pada
+  habit_detail_screen.dart, lalu menampilkan SnackBar berisi pesan error
+  alih-alih meng-crash aplikasi.
